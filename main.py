@@ -1,7 +1,5 @@
 def main():
         file_contents = read_string()
-       # word_count(file_contents)
-       # char_count(file_contents)
         print_report(file_contents)
 
 def read_string():
@@ -30,12 +28,30 @@ def char_count(string):
             char_count[char] += 1
         else:
             char_count[char] = 1
-    print(char_count)
+    return char_count
+
+def dict_to_list_dicts(dictionary):
+    return [{"key": key, "value": dictionary[key]} for key in dictionary]
+
+def sort_on(dict):
+    return dict["value"]
+
+def print_list_dict(list_dict):
+    list_dict.sort(reverse=True, key=sort_on)
+    for d in list_dict:
+        char = d["key"]
+        count = d["value"]
+        if char.isalpha():
+            print(f"The '{char}' character was found '{count}' times")
 
 def print_report(file_contents):
-    print (f"--- Begin Report of books/frankenstrin.txt --")
+    print (f"--- Begin Report of books/frankenstein.txt --")
     wc = word_count(file_contents)
-    print (f"{wc} words found in the document")
+    print (f"{wc} words found in the document\n")
+    char_dict = char_count(file_contents)
+    char_dict_list = dict_to_list_dicts(char_dict)
+    print_list_dict(char_dict_list)
+
  
 main()
 
